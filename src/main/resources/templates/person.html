@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fill the forms</title>
+</head>
+<body>
+<form action="/save" method="post" enctype="multipart/form-data">
+    <label for="name">Ф.И.Ш</label>
+    <input type="text" name="fullName" id="name" maxlength="250"><br>
+
+    <label for="date">Тўғилган сана</label>
+    <input type="date" name="dateOfBirth" id="date"><br>
+
+    <label for="nation">Миллати</label>
+    <input type="text" name="nationality" id="nation" maxlength="100"><br>
+
+    <!--here educated universities-->
+    <div style="background-color: cornsilk">
+        <label for="university">University</label>
+        <input type="text" name="universityName" id="university">
+        <label for="graduated">Graduated year</label><input type="date" name="graduatedYear" id="graduated">
+        <label for="degree">Degree</label><input type="text" name="degree" id="degree">
+    </div>
+
+    <label for="number">Телефон</label>
+    <input type="number" name="phoneNumber" id="number"><br>
+
+    <label for="email">Почта манзили</label>
+    <input type="email" name="email" id="email"><br>
+
+</form>
+</body>
+</html>
