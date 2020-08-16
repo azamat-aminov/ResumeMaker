@@ -37,6 +37,6 @@ public class ResumeController {
     public String getAllData(Model model) {
         List<Person> allData = personService.getAllData();
         model.addAttribute("data", allData);
-        return "person";
+        return "resumes";
     }
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumes table</title>
+</head>
+<body>
+<div th:if="${not #lists.isEmpty(data)}">
+    <h2>Resumes</h2>
+    <table>
+        <tr>Ф.И.Ш</tr>
+        <tr>Тўғилган сана</tr>
+        <tr>Миллати</tr>
+        <tr>Телефон</tr>
+        <tr>Почта манзили</tr>
+        <tr th:each="person :${data}">
+            <td th:utext="${person.fullName}"></td>
+            <td th:utext="${person.dateOfBirth}"></td>
+            <td th:utext="${person.nationality}"></td>
+            <td th:utext="${person.phoneNumber}"></td>
+            <td th:utext="${person.email}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
