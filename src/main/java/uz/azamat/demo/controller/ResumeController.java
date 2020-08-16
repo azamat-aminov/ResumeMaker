@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import uz.azamat.demo.model.EducationDegree;
 import uz.azamat.demo.model.Person;
@@ -32,19 +33,24 @@ public class ResumeController {
     }
 
     @PostMapping("/savePerson")
-    public String savePersons(Person person, EducationDegree educationDegree) {
-        System.out.println(person.getFullName());
-        educationDegreeService.save(educationDegree);
+    public String savePersons(Person person, Model model) {
         personService.save(person);
-        return "person";
+        List<Person> allData = personService.getAllData();
+        model.addAttribute("data", allData);
+        return "resumes";
     }
 
     @GetMapping("/getAllData")
     public String getAllData(Model model) {
         List<Person> allData = personService.getAllData();
-        List<EducationDegree> allInfoAboutEdu = educationDegreeService.getAllInfoAboutEdu();
         model.addAttribute("data", allData);
-        model.addAttribute("eduData", allInfoAboutEdu);
         return "resumes";
+    }
+
+    @GetMapping("/edit{id}")
+    public String findById(@PathVariable int id, Model model) {
+        Person person = personService.findById(id);
+        model.addAttribute("person", person);
+        return "updateUser";
     }
 }
