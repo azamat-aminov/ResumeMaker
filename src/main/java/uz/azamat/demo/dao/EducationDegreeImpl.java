@@ -16,7 +16,7 @@ public class EducationDegreeImpl implements EducationDegreeDao {
 
     @Override
     public void save(EducationDegree educationDegree) {
-        String query = "insert into university(name ,graduated_year,degree" +
+        String query = "insert into university(name ,graduated_year,degree)" +
                 "values(?,?,?)";
         jdbcTemplate.update(query, educationDegree.getUniversityName(),
                 educationDegree.getGraduatedYear(),

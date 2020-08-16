@@ -11,7 +11,7 @@ public class EducationDegreeRowMapper implements RowMapper<EducationDegree> {
     public EducationDegree mapRow(ResultSet resultSet, int i) throws SQLException {
         EducationDegree degree = new EducationDegree();
         degree.setUniversityName(resultSet.getString("name"));
-        degree.setGraduatedYear(resultSet.getDate("date"));
+        degree.setGraduatedYear(resultSet.getDate("graduated_year"));
         degree.setDegree(resultSet.getString("degree"));
 
         return degree;
