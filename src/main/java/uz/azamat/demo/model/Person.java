@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class Person {
+    private int id;
     private String fullName;
     private Date dateOfBirth;
     private String nationality;

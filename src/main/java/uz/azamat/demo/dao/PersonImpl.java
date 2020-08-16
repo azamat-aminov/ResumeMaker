@@ -11,6 +11,10 @@ import java.util.List;
 public class PersonImpl implements PersonDao {
     JdbcTemplate jdbcTemplate;
 
+    public PersonImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     @Override
     public void save(Person person) {
         String query = "insert into person(full_name,date_birth,nationality,phone_number,email) " +
