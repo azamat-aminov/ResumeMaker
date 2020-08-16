@@ -19,4 +19,8 @@ public class PersonService {
     public List<Person> getAllData() {
         return personDao.getAllData();
     }
+
+    public Person findById(int id) {
+        return personDao.findById(id);
+    }
 }
