@@ -7,4 +7,5 @@ import java.util.List;
 public interface PersonDao {
      void save(Person person);
      List<Person> getAllData();
+     Person findById(int id);
 }

@@ -31,4 +31,10 @@ public class PersonImpl implements PersonDao {
         String query = "select * from person";
         return jdbcTemplate.query(query, new PersonRowMapper());
     }
+
+    @Override
+    public Person findById(int id) {
+        String query = "select * from person where id = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, new PersonRowMapper());
+    }
 }
