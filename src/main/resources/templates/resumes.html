@@ -13,18 +13,12 @@
         <tr>Миллати</tr>
         <tr>Телефон</tr>
         <tr>Почта манзили</tr>
-        <tr>Амаллар</tr>
         <tr th:each="person :${data}">
             <td th:utext="${person.fullName}"></td>
             <td th:utext="${person.dateOfBirth}"></td>
             <td th:utext="${person.nationality}"></td>
             <td th:utext="${person.phoneNumber}"></td>
             <td th:utext="${person.email}"></td>
-            <td>
-                <a th: href="/@{'edit' + ${person.id}}">Таҳрирлаш</a>
-                <a th: href="/@{'delete' + ${product.id}}">Ўчириш</a>
-
-            </td>
         </tr>
     </table>
 </div>
