@@ -16,7 +16,7 @@ public class PersonService {
         personDao.save(person);
     }
 
-    List<Person> getAllData() {
+    public List<Person> getAllData() {
         return personDao.getAllData();
     }
 }
