@@ -16,13 +16,15 @@
     <input type="text" th:field="*{nationality}" id="nation" maxlength="100"><br>
 
     <!--here educated universities-->
-    <div style="background-color: cornsilk">
-        <label for="university">University</label>
-        <input type="text" name="universityName" id="university">
-        <label for="graduated">Graduated year</label><input type="date" name="graduatedYear" id="graduated">
-        <label for="degree">Degree</label><input type="text" name="degree" id="degree">
+    <div style="background-color: cornsilk" id="items">
+        <label for="university">Университет</label>
+        <input type="text" name="*{universityName}" id="university">
+        <label for="graduated">Тугатган йили</label><input type="date" name="*{graduatedYear}" id="graduated">
+        <label for="degree">Маьлумоти</label><input type="text" name="*{degree}" id="degree">
     </div>
+    <input type="button" value="Қўшиш" id="add">
 
+    <br>
     <label for="number">Телефон</label>
     <input type="number" th:field="*{phoneNumber}" id="number"><br>
 
@@ -31,5 +33,21 @@
     <input type="submit" name="submit" value="Тасдиқлаш">
     <input type="button" onclick="location.href='/getAllData'" value="Барча резюмелар"/>
 </form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#add").click(function (e) {
+            event.preventDefault()
+            $('#items').append('<div><input type="text" name="*{universityName}" id="university">' +
+                '<input type="date" name="*{graduatedYear}" id="graduated">' +
+                '<input type="text" name="*{degree}" id="degree">' +
+                '<input type="button" value="Ўчириш" id="delete"></div>');
+        });
+        $('body').on('click', '#delete', function (e) {
+            $(this).parent('div').remove();
+        });
+    });
+</script>
 </body>
 </html>
