@@ -23,4 +23,8 @@ public class PersonService {
     public Person findById(int id) {
         return personDao.findById(id);
     }
+
+    public void updatePerson(Person person, int id) {
+        personDao.updatePerson(person, id);
+    }
 }
