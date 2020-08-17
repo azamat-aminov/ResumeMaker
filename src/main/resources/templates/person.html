@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Fill the forms</title>
 </head>
 <body>
-<form action="/savePerson" method="post" enctype="multipart/form-data">
+<form action="#" th:action="@{/savePerson}" th:object="${person}" method="post">
     <label for="name">Ф.И.Ш</label>
-    <input type="text" name="fullName" id="name" maxlength="250"><br>
+    <input type="text" th:field="*{fullName}" id="name" maxlength="250"><br>
 
     <label for="date">Тўғилган сана</label>
-    <input type="date" name="dateOfBirth" id="date"><br>
+    <input type="date" th:field="*{dateOfBirth}" id="date"><br>
 
     <label for="nation">Миллати</label>
-    <input type="text" name="nationality" id="nation" maxlength="100"><br>
+    <input type="text" th:field="*{nationality}" id="nation" maxlength="100"><br>
 
     <!--here educated universities-->
     <div style="background-color: cornsilk">
@@ -24,10 +24,10 @@
     </div>
 
     <label for="number">Телефон</label>
-    <input type="number" name="phoneNumber" id="number"><br>
+    <input type="number" th:field="*{phoneNumber}" id="number"><br>
 
     <label for="email">Почта манзили</label>
-    <input type="email" name="email" id="email"><br>
+    <input type="email" th:field="*{email}" id="email"><br>
     <input type="submit" name="submit" value="submit">
 </form>
 </body>

@@ -8,32 +8,26 @@
 <div th:if="${not #lists.isEmpty(data)}">
     <h2>Resumes</h2>
     <table>
-        <tr>Ф.И.Ш</tr>
-        <tr>Тўғилган сана</tr>
-        <tr>Миллати</tr>
-        <tr>Телефон</tr>
-        <tr>Почта манзили</tr>
+        <tr>
+            <th>Ф.И.Ш</th>
+            <th>Тўғилган сана</th>
+            <th>Миллати</th>
+            <th>Телефон</th>
+            <th>Почта манзили</th>
+            <th>Таҳрирлаш</th>
+            <th>Ўчириш</th>
+        </tr>
         <tr th:each="person :${data}">
             <td th:utext="${person.fullName}"></td>
             <td th:utext="${person.dateOfBirth}"></td>
             <td th:utext="${person.nationality}"></td>
             <td th:utext="${person.phoneNumber}"></td>
             <td th:utext="${person.email}"></td>
+            <td><a th:href="@{/edit/{id}(id=${person.id})}">Таҳрирлаш</a></td>
+            <td><a th:href="@{/delete/{id}(id=${person.id})}">Ўчириш</a></td>
         </tr>
     </table>
-</div>
-
-<div th:if="${not #lists.isEmpty(eduData)}">
-    <h2>ОТМ</h2>
-    <table>
-        <tr>Номи</tr>
-        <tr>Тугатган йили</tr>
-        <tr th:each="edu :${eduData}">
-            <td th:utext="${edu.universityName}"></td>
-            <td th:utext="${edu.graduatedYear}"></td>
-            <td th:utext="${edu.degree}"></td>
-        </tr>
-    </table>
+    <p><a href="/savePerson">Резюме қўшиш</a></p>
 </div>
 </body>
 </html>
