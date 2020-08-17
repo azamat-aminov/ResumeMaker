@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>About person</title>
 </head>
 <body>
-
+<h2>Резюме</h2>
+<table>
+    <tr th:each="data : ${onePerson}">
+        <th>Ф.И.Ш</th>
+        <td th:utext="${data.fullName}"></td>
+    </tr>
+    <tr th:each="data : ${onePerson}">
+        <th>Тўғилган сана</th>
+        <td th:utext="${data.dateOfBirth}"></td>
+    </tr>
+    <tr th:each="data : ${onePerson}">
+        <th>Миллати</th>
+        <td th:utext="${data.nationality}"></td>
+    </tr>
+    <tr th:each="data : ${onePerson}">
+        <th>Телефон</th>
+        <td th:utext="${data.phoneNumber}"></td>
+    </tr>
+    <tr th:each="data : ${onePerson}">
+        <th>Почта манзили</th>
+        <td th:utext="${data.email}"></td>
+    </tr>
+</table>
 </body>
 </html>
