@@ -17,7 +17,7 @@
             <th>Таҳрирлаш</th>
             <th>Ўчириш</th>
         </tr>
-        <tr th:each="person :${data}">
+        <tr th:each="person :${data}" th:onclick="|window.location = '/data/by/' + ${person.id}">
             <td th:utext="${person.fullName}"></td>
             <td th:utext="${person.dateOfBirth}"></td>
             <td th:utext="${person.nationality}"></td>
