@@ -24,7 +24,16 @@ public class ResumeController {
     @Autowired
     EducationDegreeService educationDegreeService;
 
-    @GetMapping("/form")
+    @GetMapping()
+    public String getLoginPage() {
+        return "login";
+    }
+    @GetMapping("/createPerson")
+    public String createPerson(Person person) {
+        return "person";
+    }
+
+    @PostMapping("/form")
     public String callFormPage(Person person) {
         return "person";
     }
@@ -59,6 +68,12 @@ public class ResumeController {
         return "resumes";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deletePerson(@PathVariable int id, Model model) {
+        personService.deletePerson(id);
+        model.addAttribute("data", personService.getAllData());
+        return "resumes";
+    }
 
     @GetMapping("/getAllData")
     public String getAllData(Model model) {
