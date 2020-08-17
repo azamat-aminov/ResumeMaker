@@ -11,5 +11,6 @@ public interface PersonDao {
 
     Person findById(int id);
 
-    void updatePerson(Person person, int id);
+    void update(Person person, int id);
+    void delete(int id);
 }

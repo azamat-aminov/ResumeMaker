@@ -25,6 +25,9 @@ public class PersonService {
     }
 
     public void updatePerson(Person person, int id) {
-        personDao.updatePerson(person, id);
+        personDao.update(person, id);
+    }
+    public void deletePerson(int id){
+        personDao.delete(id);
     }
 }

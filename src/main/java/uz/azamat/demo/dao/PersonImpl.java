@@ -34,12 +34,12 @@ public class PersonImpl implements PersonDao {
 
     @Override
     public Person findById(int id) {
-        String query = "select * from person where id = ?";
+        String query = "select * from person where id=?";
         return jdbcTemplate.queryForObject(query, new Object[]{id}, new PersonRowMapper());
     }
 
     @Override
-    public void updatePerson(Person person, int id) {
+    public void update(Person person, int id) {
         String query = "update person set full_name=?, date_birth=?,nationality=?,phone_number=?,email=? where id=?";
         jdbcTemplate.update(query, person.getFullName(),
                 person.getDateOfBirth(),
@@ -47,5 +47,11 @@ public class PersonImpl implements PersonDao {
                 person.getPhoneNumber(),
                 person.getEmail(),
                 id);
+    }
+
+    @Override
+    public void delete(int id) {
+        String query = "delete from person where id=?";
+        jdbcTemplate.update(query, id);
     }
 }
