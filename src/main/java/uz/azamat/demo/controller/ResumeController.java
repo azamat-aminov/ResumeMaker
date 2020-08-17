@@ -74,6 +74,11 @@ public class ResumeController {
         model.addAttribute("data", personService.getAllData());
         return "resumes";
     }
+    @GetMapping("/data/by/{id}")
+    public String getOnePerson(@PathVariable int id, Model model){
+         model.addAttribute("onePerson", personService.findById(id));
+        return "onePersonInfo";
+    }
 
     @GetMapping("/getAllData")
     public String getAllData(Model model) {
