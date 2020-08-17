@@ -24,8 +24,8 @@ public class ResumeController {
     @Autowired
     EducationDegreeService educationDegreeService;
 
-    @GetMapping("/sign-up")
-    public String showSignUpForm(Person person) {
+    @GetMapping("/form")
+    public String callFormPage(Person person) {
         return "person";
     }
 
