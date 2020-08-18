@@ -16,11 +16,11 @@
     <input type="text" th:field="*{nationality}" id="nation" maxlength="100"><br>
 
     <!--here educated universities-->
-    <div style="background-color: cornsilk" id="items">
+    <div style="background-color: cornsilk" id="items" th:object="${educationDegree}">
         <label for="university">Университет</label>
-        <input type="text" name="*{universityName}" id="university">
-        <label for="graduated">Тугатган йили</label><input type="date" name="*{graduatedYear}" id="graduated">
-        <label for="degree">Маьлумоти</label><input type="text" name="*{degree}" id="degree">
+        <input type="text" th:field="*{universityName}" id="university">
+        <label for="graduated">Тугатган йили</label><input type="date" th:field="*{graduatedYear}" id="graduated">
+        <label for="degree">Маьлумоти</label><input type="text" th:field="*{degree}" id="degree">
     </div>
     <input type="button" value="Қўшиш" id="add">
 
@@ -36,12 +36,14 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    // var edCount = 1;
     $(document).ready(function () {
         $("#add").click(function (e) {
             event.preventDefault()
-            $('#items').append('<div><input type="text" name="*{universityName}" id="university">' +
-                '<input type="date" name="*{graduatedYear}" id="graduated">' +
-                '<input type="text" name="*{degree}" id="degree">' +
+            // edCount++;
+            $('#items').append('<div><input type="text" name="' + 'universityName' + '" id="university">' +
+                '<input type="date" name="' + 'graduatedYear' + '"id="graduated">' +
+                '<input type="text" name="' + 'degree' + '"id="degree">' +
                 '<input type="button" value="Ўчириш" id="delete"></div>');
         });
         $('body').on('click', '#delete', function (e) {
