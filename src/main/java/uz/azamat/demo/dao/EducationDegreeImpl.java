@@ -15,12 +15,14 @@ public class EducationDegreeImpl implements EducationDegreeDao {
     }
 
     @Override
-    public void save(EducationDegree educationDegree) {
+    public void save(List<EducationDegree> educationDegrees) {
         String query = "insert into university(name ,graduated_year,degree)" +
                 "values(?,?,?)";
-        jdbcTemplate.update(query, educationDegree.getUniversityName(),
-                educationDegree.getGraduatedYear(),
-                educationDegree.getDegree());
+        for (EducationDegree degree : educationDegrees) {
+            jdbcTemplate.update(query, degree.getUniversityName(),
+                    degree.getGraduatedYear(),
+                    degree.getDegree());
+        }
     }
 
     @Override
