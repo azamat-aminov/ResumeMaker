@@ -15,13 +15,24 @@
     <label for="nation">Миллати</label>
     <input type="text" th:field="*{nationality}" id="nation" maxlength="100"><br>
 
-    <!--here educated universities-->
-    <div style="background-color: cornsilk">
-        <label for="university">University</label>
-        <input type="text" name="universityName" id="university">
-        <label for="graduated">Graduated year</label><input type="date" name="graduatedYear" id="graduated">
-        <label for="degree">Degree</label><input type="text" name="degree" id="degree">
-    </div>
+   <div th:object="${educationDegree}">
+       <table>
+           <thead>
+           <tr>
+               <th>University</th>
+               <th>Graduated year</th>
+               <th>Degree</th>
+           </tr>
+           </thead>
+           <tbody>
+           <tr th:each="data : ${universities}">
+               <td><input type="text" th:value="${data.universityName}" name="universityName"/></td>
+               <td><input type="text" th:value="${data.graduatedYear}" name="graduatedYear"/></td>
+               <td><input type="text" th:value="${data.degree}" name="degree"/></td>
+           </tr>
+           </tbody>
+       </table>
+   </div>
 
     <label for="number">Телефон</label>
     <input type="number" th:field="*{phoneNumber}" id="number"><br>
