@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import uz.azamat.demo.dao.PersonImpl;
 import uz.azamat.demo.model.EducationDegree;
 import uz.azamat.demo.model.Person;
@@ -79,7 +80,10 @@ public class ResumeController {
     @GetMapping("/edit/{id}")
     public String findById(@PathVariable int id, Model model) {
         Person person = personService.findById(id);
+        List<EducationDegree> educationDegrees = educationDegreeService.eduFindById(id);
+        System.out.println(educationDegrees);
         model.addAttribute("person", person);
+        model.addAttribute("universities", educationDegrees);
         return "updateUser";
     }
 
