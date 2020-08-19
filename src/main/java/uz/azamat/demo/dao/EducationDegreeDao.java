@@ -5,7 +5,7 @@ import uz.azamat.demo.model.EducationDegree;
 import java.util.List;
 
 public interface EducationDegreeDao {
-    void save(List<EducationDegree> educationDegrees);
+    void save(List<EducationDegree> educationDegrees, int i);
 
     List<EducationDegree> getAllData();
 }

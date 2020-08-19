@@ -13,8 +13,8 @@ public class EducationDegreeService {
     EducationDegreeDao educationDegreeDao;
 
 
-    public void save(List<EducationDegree> educationDegrees){
-        educationDegreeDao.save(educationDegrees);
+    public void save(List<EducationDegree> educationDegrees, int id){
+        educationDegreeDao.save(educationDegrees, id);
     }
 
     public List<EducationDegree> getAllInfoAboutEdu(){
