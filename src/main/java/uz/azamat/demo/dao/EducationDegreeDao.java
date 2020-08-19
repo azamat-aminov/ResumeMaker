@@ -8,4 +8,8 @@ public interface EducationDegreeDao {
     void save(List<EducationDegree> educationDegrees, int i);
 
     List<EducationDegree> getAllData();
+
+    List<EducationDegree> eduFindById(int id);
+
+     void updateDegree(List<EducationDegree> degrees, int id);
 }

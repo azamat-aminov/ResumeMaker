@@ -43,4 +43,22 @@ public class EducationDegreeImpl implements EducationDegreeDao {
         String query = "select * from universities";
         return jdbcTemplate.query(query, new EducationDegreeRowMapper());
     }
+
+    @Override
+    public List<EducationDegree> eduFindById(int id) {
+        String query = "select * from universities where id=" + id;
+        return jdbcTemplate.query(query, new EducationDegreeRowMapper());
+    }
+
+    @Override
+    public void updateDegree(List<EducationDegree> degrees, int id) {
+        String query = "update universities set name=?, graduated_year=?, degree=? where id=?";
+        for (EducationDegree degree : degrees) {
+            jdbcTemplate.update(query,
+                    degree.getUniversityName(),
+                    degree.getGraduatedYear(),
+                    degree.getDegree(),
+                    id);
+        }
+    }
 }

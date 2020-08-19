@@ -13,11 +13,20 @@ public class EducationDegreeService {
     EducationDegreeDao educationDegreeDao;
 
 
-    public void save(List<EducationDegree> educationDegrees, int id){
+    public void save(List<EducationDegree> educationDegrees, int id) {
         educationDegreeDao.save(educationDegrees, id);
     }
 
-    public List<EducationDegree> getAllInfoAboutEdu(){
-       return educationDegreeDao.getAllData();
+    public List<EducationDegree> getAllInfoAboutEdu() {
+        return educationDegreeDao.getAllData();
     }
+
+    public List<EducationDegree> eduFindById(int id) {
+        return educationDegreeDao.eduFindById(id);
+    }
+
+    public void updateDegree(List<EducationDegree> degrees, int id) {
+        educationDegreeDao.updateDegree(degrees, id);
+    }
+
 }
