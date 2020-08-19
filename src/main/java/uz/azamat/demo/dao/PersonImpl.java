@@ -17,7 +17,7 @@ public class PersonImpl implements PersonDao {
 
     @Override
     public void save(Person person) {
-        String query = "insert into person(full_name,date_birth,nationality,phone_number,email) " +
+        String query = "insert into persons(full_name,date_birth,nationality,phone_number,email) " +
                 "values(?,?,?,?,?)";
         jdbcTemplate.update(query, person.getFullName(),
                 person.getDateOfBirth(),
@@ -28,19 +28,19 @@ public class PersonImpl implements PersonDao {
 
     @Override
     public List<Person> getAllData() {
-        String query = "select * from person";
+        String query = "select * from persons";
         return jdbcTemplate.query(query, new PersonRowMapper());
     }
 
     @Override
     public Person findById(int id) {
-        String query = "select * from person where id=?";
+        String query = "select * from persons where id=?";
         return jdbcTemplate.queryForObject(query, new Object[]{id}, new PersonRowMapper());
     }
 
     @Override
     public void update(Person person, int id) {
-        String query = "update person set full_name=?, date_birth=?,nationality=?,phone_number=?,email=? where id=?";
+        String query = "update persons set full_name=?, date_birth=?,nationality=?,phone_number=?,email=? where id=?";
         jdbcTemplate.update(query, person.getFullName(),
                 person.getDateOfBirth(),
                 person.getNationality(),

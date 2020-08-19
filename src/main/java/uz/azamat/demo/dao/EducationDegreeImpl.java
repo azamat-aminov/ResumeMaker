@@ -16,7 +16,7 @@ public class EducationDegreeImpl implements EducationDegreeDao {
 
     @Override
     public void save(List<EducationDegree> educationDegrees) {
-        String query = "insert into university(name ,graduated_year,degree)" +
+        String query = "insert into universities(name ,graduated_year,degree)" +
                 "values(?,?,?)";
         for (EducationDegree degree : educationDegrees) {
             jdbcTemplate.update(query, degree.getUniversityName(),
@@ -27,7 +27,7 @@ public class EducationDegreeImpl implements EducationDegreeDao {
 
     @Override
     public List<EducationDegree> getAllData() {
-        String query = "select * from university";
+        String query = "select * from universities";
         return jdbcTemplate.query(query, new EducationDegreeRowMapper());
     }
 }
