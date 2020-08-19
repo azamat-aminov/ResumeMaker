@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import uz.azamat.demo.dao.PersonImpl;
 import uz.azamat.demo.model.EducationDegree;
 import uz.azamat.demo.model.Person;
 import uz.azamat.demo.service.EducationDegreeService;
@@ -48,7 +49,7 @@ public class ResumeController {
         }
         List<EducationDegree> educationDegrees = new ArrayList<>();
         Map<String, String[]> parameterMap = req.getParameterMap();
-        EducationDegree edu = new EducationDegree();
+
         String[] universityNames = parameterMap.get("universityName");
         String[] gradYear = parameterMap.get("graduatedYear");
         String[] degrees = parameterMap.get("degree");
@@ -56,6 +57,7 @@ public class ResumeController {
         System.out.println(Arrays.toString(gradYear));
         System.out.println(Arrays.toString(degrees));
         for (int i = 0; i < universityNames.length; i++) {
+            EducationDegree edu = new EducationDegree();
             String universityName = universityNames[i];
             String graduatedYear = gradYear[i];
             String degree = degrees[i];
@@ -65,9 +67,10 @@ public class ResumeController {
             edu.setDegree(degree);
             educationDegrees.add(edu);
         }
-
-        educationDegreeService.save(educationDegrees);
+        System.out.println("List: " + educationDegrees);
         personService.save(person);
+        System.out.println(PersonImpl.KEY);
+        educationDegreeService.save(educationDegrees, PersonImpl.KEY);
         List<Person> allData = personService.getAllData();
         model.addAttribute("data", allData);
         return "resumes";
