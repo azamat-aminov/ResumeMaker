@@ -42,17 +42,19 @@ public class ResumeController {
     }
 
     @PostMapping("/savePerson")
-    public String savePersons(Person person, Model model, BindingResult result,
-                              EducationDegree edu, HttpServletRequest req) {
+    public String savePersons(Person person, Model model, BindingResult result, HttpServletRequest req) {
         if (result.hasErrors()) {
             return "person";
         }
         List<EducationDegree> educationDegrees = new ArrayList<>();
         Map<String, String[]> parameterMap = req.getParameterMap();
-
+        EducationDegree edu = new EducationDegree();
         String[] universityNames = parameterMap.get("universityName");
         String[] gradYear = parameterMap.get("graduatedYear");
         String[] degrees = parameterMap.get("degree");
+        System.out.println(Arrays.toString(universityNames));
+        System.out.println(Arrays.toString(gradYear));
+        System.out.println(Arrays.toString(degrees));
         for (int i = 0; i < universityNames.length; i++) {
             String universityName = universityNames[i];
             String graduatedYear = gradYear[i];
@@ -64,7 +66,7 @@ public class ResumeController {
             educationDegrees.add(edu);
         }
 
-        educationDegreeService.save(edu);
+        educationDegreeService.save(educationDegrees);
         personService.save(person);
         List<Person> allData = personService.getAllData();
         model.addAttribute("data", allData);

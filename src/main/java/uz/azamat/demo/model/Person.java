@@ -12,6 +12,6 @@ public class Person {
     private Date dateOfBirth;
     private String nationality;
     private List<EducationDegree> educationDegrees;
-    private int phoneNumber;
+    private String phoneNumber;
     private String email;
 }
