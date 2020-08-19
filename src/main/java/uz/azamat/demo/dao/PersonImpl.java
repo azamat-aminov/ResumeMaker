@@ -65,7 +65,7 @@ public class PersonImpl implements PersonDao {
 
     @Override
     public void delete(int id) {
-        String query = "delete from person where id=?";
+        String query = "delete from persons where id=?";
         jdbcTemplate.update(query, id);
     }
 }
