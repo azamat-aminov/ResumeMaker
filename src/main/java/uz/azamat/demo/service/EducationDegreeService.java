@@ -25,8 +25,8 @@ public class EducationDegreeService {
         return educationDegreeDao.eduFindById(id);
     }
 
-    public void updateDegree(List<EducationDegree> degrees, int id) {
-        educationDegreeDao.updateDegree(degrees, id);
+    public void updateDegree(List<EducationDegree> degrees) {
+        educationDegreeDao.updateDegree(degrees);
     }
 
 }
