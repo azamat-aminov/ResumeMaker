@@ -8,4 +8,5 @@ public class EducationDegree {
     private String universityName;
     private Date graduatedYear;
     private String degree;
+    private int id;
 }
