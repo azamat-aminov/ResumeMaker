@@ -51,14 +51,21 @@ public class EducationDegreeImpl implements EducationDegreeDao {
     }
 
     @Override
-    public void updateDegree(List<EducationDegree> degrees, int id) {
-        String query = "update universities set name=?, graduated_year=?, degree=? where id=?";
-        for (EducationDegree degree : degrees) {
-            jdbcTemplate.update(query,
-                    degree.getUniversityName(),
-                    degree.getGraduatedYear(),
-                    degree.getDegree(),
-                    id);
-        }
+    public void updateDegree(List<EducationDegree> degrees) {
+        String query = "update universities set name=?, graduated_year=?, degree=? where univer_id=?";
+        jdbcTemplate.batchUpdate(query, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, degrees.get(i).getUniversityName());
+                ps.setDate(2, degrees.get(i).getGraduatedYear());
+                ps.setString(3, degrees.get(i).getDegree());
+                ps.setInt(4, degrees.get(i).getUniversityId());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return degrees.size();
+            }
+        });
     }
 }
