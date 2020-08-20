@@ -13,6 +13,7 @@ public class EducationDegreeRowMapper implements RowMapper<EducationDegree> {
         degree.setUniversityName(resultSet.getString("name"));
         degree.setGraduatedYear(resultSet.getDate("graduated_year"));
         degree.setDegree(resultSet.getString("degree"));
+        degree.setId(resultSet.getInt("id"));
 
         return degree;
     }
