@@ -5,31 +5,31 @@
     <title>Fill the forms</title>
 </head>
 <body>
-<form action="#" th:action="@{/savePerson}" th:object="${person}" method="post">
+<form action="#" th:action="@{/savePerson}" method="post">
     <label for="name">Ф.И.Ш</label>
-    <input type="text" th:field="*{fullName}" id="name" maxlength="250"><br>
+    <input type="text" name="fullName" id="name" maxlength="250"><br>
 
     <label for="date">Тўғилган сана</label>
-    <input type="date" th:field="*{dateOfBirth}" id="date"><br>
+    <input type="date" name="dateOfBirth" id="date"><br>
 
     <label for="nation">Миллати</label>
-    <input type="text" th:field="*{nationality}" id="nation" maxlength="100"><br>
+    <input type="text" name="nationality" id="nation" maxlength="100"><br>
 
     <!--here educated universities-->
-    <div style="background-color: cornsilk" id="items" th:object="${educationDegree}">
+    <div style="background-color: cornsilk" id="items">
         <label for="university">Университет</label>
-        <input type="text" th:field="*{universityName}" id="university">
-        <label for="graduated">Тугатган йили</label><input type="date" th:field="*{graduatedYear}" id="graduated">
-        <label for="degree">Маьлумоти</label><input type="text" th:field="*{degree}" id="degree">
+        <input type="text" name="universityName" id="university">
+        <label for="graduated">Тугатган йили</label><input type="date" name="graduatedYear" id="graduated">
+        <label for="degree">Маьлумоти</label><input type="text" name="degree" id="degree">
     </div>
     <input type="button" value="Қўшиш" id="add">
 
     <br>
     <label for="number">Телефон</label>
-    <input type="number" th:field="*{phoneNumber}" id="number"><br>
+    <input type="number" name="phoneNumber" id="number"><br>
 
     <label for="email">Почта манзили</label>
-    <input type="email" th:field="*{email}" id="email"><br>
+    <input type="email" name="email" id="email"><br>
     <input type="submit" name="submit" value="Тасдиқлаш">
     <input type="button" onclick="location.href='/getAllData'" value="Барча резюмелар"/>
 </form>
