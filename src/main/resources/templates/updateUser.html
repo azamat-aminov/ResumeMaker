@@ -19,6 +19,7 @@
         <table>
             <thead>
             <tr>
+                <th><input class='check_all' type='checkbox' onclick="select_all()"/></th>
                 <th>University</th>
                 <th>Graduated year</th>
                 <th>Degree</th>
@@ -26,6 +27,7 @@
             </thead>
             <tbody>
             <tr th:each="data : ${universities}">
+                <td><input type='checkbox' class='case'/></td>
                 <td><input type="text" th:value="${data.universityName}" name="universityName"/></td>
                 <td><input type="text" th:value="${data.graduatedYear}" name="graduatedYear"/></td>
                 <td><input type="text" th:value="${data.degree}" name="degree"/></td>
@@ -33,6 +35,8 @@
             </tr>
             </tbody>
         </table>
+        <button type="button" class='delete'>Delete</button>
+        <button type="button" class='addMore'>Add More</button>
     </div>
 
     <label for="number">Телефон</label>
@@ -43,5 +47,43 @@
     <input type="submit" name="submit" value="Тасдиқлаш">
     <button onclick="location.href='/getAllData'">Орқага</button>
 </form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(".addMore").on('click', function () {
+        let data = "<tr>" +
+            "<td><input type='checkbox' class='case'/></td>";
+        data += "<td><input type='text' id='universityName' name='universityName'/></td> " +
+            "<td><input type='text' id='graduatedYear' name='graduatedYear'/></td>" +
+            "<td><input type='text' id='degree' name='degree'/></td> " +
+            "<td><input type='hidden' id='degreeId' name='degreeId'></td></tr>";
+        $('table').append(data);
+    });
+
+    $(".delete").on('click', function () {
+        $('.case:checkbox:checked').parents("tr").remove();
+        $('.check_all').prop("checked", false);
+        check();
+    });
+
+    function select_all() {
+        $('input[class=case]:checkbox').each(function () {
+            if ($('input[class=check_all]:checkbox:checked').length === 0) {
+                $(this).prop("checked", false);
+            } else {
+                $(this).prop("checked", true);
+            }
+        });
+    }
+
+    function check() {
+        obj = $('table tr').find('span');
+        $.each(obj, function (key, value) {
+            id = value.id;
+            $('#' + id).html(key + 1);
+        });
+    }
+</script>
 </body>
 </html>
