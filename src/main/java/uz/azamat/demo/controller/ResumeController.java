@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import uz.azamat.demo.dao.PersonImpl;
 import uz.azamat.demo.model.EducationDegree;
 import uz.azamat.demo.model.Person;
+import uz.azamat.demo.model.WorkPlace;
 import uz.azamat.demo.service.EducationDegreeService;
 import uz.azamat.demo.service.PersonService;
+import uz.azamat.demo.service.WorkPlaceService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,8 @@ public class ResumeController {
     PersonService personService;
     @Autowired
     EducationDegreeService educationDegreeService;
+    @Resource
+    WorkPlaceService workPlaceService;
 
     @GetMapping()
     public String getLoginPage() {
@@ -47,14 +51,15 @@ public class ResumeController {
             return "person";
         }
         List<EducationDegree> educationDegrees = new ArrayList<>();
+        List<WorkPlace> workPlaces = new ArrayList<>();
         Map<String, String[]> parameterMap = req.getParameterMap();
 
         String[] universityNames = parameterMap.get("universityName");
         String[] gradYear = parameterMap.get("graduatedYear");
         String[] degrees = parameterMap.get("degree");
-        System.out.println(Arrays.toString(universityNames));
-        System.out.println(Arrays.toString(gradYear));
-        System.out.println(Arrays.toString(degrees));
+        String[] workPlacesArray = parameterMap.get("workPlaceName");
+        System.out.println(Arrays.toString(workPlacesArray));
+
         for (int i = 0; i < universityNames.length; i++) {
             EducationDegree edu = new EducationDegree();
             String universityName = universityNames[i];
@@ -68,8 +73,15 @@ public class ResumeController {
             edu.setDegree(degree);
             educationDegrees.add(edu);
         }
+        for (String s : workPlacesArray) {
+            WorkPlace workPlace = new WorkPlace();
+            String workPlaceName = s;
+            workPlace.setWorkPlaceName(workPlaceName);
+            workPlaces.add(workPlace);
+        }
         personService.save(person);
         educationDegreeService.save(educationDegrees, PersonImpl.KEY);
+        workPlaceService.save(workPlaces, PersonImpl.KEY);
         List<Person> allData = personService.getAllData();
         model.addAttribute("data", allData);
         return "resumes";
