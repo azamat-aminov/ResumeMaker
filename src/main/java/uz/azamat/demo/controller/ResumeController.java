@@ -60,9 +60,11 @@ public class ResumeController {
             String universityName = universityNames[i];
             String graduatedYear = gradYear[i];
             String degree = degrees[i];
-            Date date = Date.valueOf(graduatedYear);
+            if (!graduatedYear.isEmpty()) {
+                Date date = Date.valueOf(graduatedYear);
+                edu.setGraduatedYear(date);
+            }
             edu.setUniversityName(universityName);
-            edu.setGraduatedYear(date);
             edu.setDegree(degree);
             educationDegrees.add(edu);
         }
@@ -95,10 +97,7 @@ public class ResumeController {
         String[] gradYear = parameterMap.get("graduatedYear");
         String[] degrees = parameterMap.get("degree");
         String[] ids = parameterMap.get("degreeId");
-
         System.out.println(Arrays.toString(universityNames));
-        System.out.println(Arrays.toString(gradYear));
-        System.out.println(Arrays.toString(degrees));
         System.out.println(Arrays.toString(ids));
 
         for (int i = 0; i < universityNames.length; i++) {
@@ -107,14 +106,54 @@ public class ResumeController {
             String graduatedYear = gradYear[i];
             String degree = degrees[i];
             String degreeId = ids[i];
-            Date date = Date.valueOf(graduatedYear);
-            edu.setUniversityName(universityName);
-            edu.setGraduatedYear(date);
-            edu.setDegree(degree);
-            edu.setUniversityId(Integer.parseInt(degreeId));
-            educationDegrees.add(edu);
+
+
+            if (ids[i].equals("") || ids[i].isEmpty()) {
+                List<EducationDegree> newEduDegrees = new ArrayList<>();
+                EducationDegree newEdu = new EducationDegree();
+                String newUniversityName = universityNames[i];
+                String newGraduatedYear = gradYear[i];
+                String newDegree = degrees[i];
+                newEdu.setUniversityName(newUniversityName);
+                Date date2 = Date.valueOf(newGraduatedYear);
+                newEdu.setGraduatedYear(date2);
+                newEdu.setDegree(newDegree);
+                newEduDegrees.add(newEdu);
+                educationDegreeService.save(newEduDegrees, id);
+            } else {
+                if (!graduatedYear.isEmpty()) {
+                    Date date = Date.valueOf(graduatedYear);
+                    edu.setGraduatedYear(date);
+                }
+                edu.setUniversityName(universityName);
+                edu.setDegree(degree);
+                edu.setUniversityId(Integer.parseInt(degreeId));
+                educationDegrees.add(edu);
+            }
         }
-        System.out.println("to update list: " + educationDegrees);
+//         delete logic
+        List<Integer> listIds = new ArrayList<>();
+        List<Integer> getAllIds = new ArrayList<>();
+
+        List<EducationDegree> allInfoAboutEdu = educationDegreeService.eduFindById(id);
+        for (EducationDegree deg : allInfoAboutEdu) {
+            getAllIds.add(deg.getUniversityId());
+        }
+        for (String s : ids) {
+            if (!s.equals("")) {
+                listIds.add(Integer.valueOf(s));
+            }
+        }
+        if (listIds.size() < getAllIds.size()) {
+            List<Integer> deletedId = new ArrayList<>(getAllIds);
+            deletedId.removeAll(listIds);
+            for (int del : deletedId) {
+                educationDegreeService.deleteByUniversityId(del);
+            }
+
+        }
+
+
         personService.updatePerson(person, id);
         educationDegreeService.updateDegree(educationDegrees);
         model.addAttribute("data", personService.getAllData());
