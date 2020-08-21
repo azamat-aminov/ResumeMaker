@@ -12,4 +12,6 @@ public interface EducationDegreeDao {
     List<EducationDegree> eduFindById(int id);
 
      void updateDegree(List<EducationDegree> degrees);
+
+     void deleteByUniversityId(int universityId);
 }

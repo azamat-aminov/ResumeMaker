@@ -28,5 +28,8 @@ public class EducationDegreeService {
     public void updateDegree(List<EducationDegree> degrees) {
         educationDegreeDao.updateDegree(degrees);
     }
+    public void deleteByUniversityId(int id){
+        educationDegreeDao.deleteByUniversityId(id);
+    }
 
 }
