@@ -30,23 +30,40 @@
 
     <label for="email">Почта манзили</label>
     <input type="email" name="email" id="email"><br>
+    <div id="items2">
+        <label for="workPlace">Ишлаган жойлари</label>
+        <input type="text" name="workPlace" id="workPlace">
+    </div>
+    <input type="button" value="Қўшиш" id="add2"><br>
+
+
     <input type="submit" name="submit" value="Тасдиқлаш">
     <input type="button" onclick="location.href='/getAllData'" value="Барча резюмелар"/>
 </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    // var edCount = 1;
+
     $(document).ready(function () {
         $("#add").click(function (e) {
             event.preventDefault()
-            // edCount++;
             $('#items').append('<div><input type="text" name="' + 'universityName' + '" id="university">' +
                 '<input type="date" name="' + 'graduatedYear' + '"id="graduated">' +
                 '<input type="text" name="' + 'degree' + '"id="degree">' +
                 '<input type="button" value="Ўчириш" id="delete"></div>');
         });
         $('body').on('click', '#delete', function (e) {
+            $(this).parent('div').remove();
+        });
+    });
+
+    $(document).ready(function () {
+        $("#add2").click(function (e) {
+            event.preventDefault()
+            $('#items2').append('<div><input type="text" name="' + 'workPlace' + '" id="workPlace">' +
+                '<input type="button" value="Ўчириш" id="delete2"></div>');
+        });
+        $('body').on('click', '#delete2', function (e) {
             $(this).parent('div').remove();
         });
     });
