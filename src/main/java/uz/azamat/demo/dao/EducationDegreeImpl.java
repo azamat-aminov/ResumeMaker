@@ -74,4 +74,10 @@ public class EducationDegreeImpl implements EducationDegreeDao {
         String query = "delete from universities where univer_id =?";
         jdbcTemplate.update(query, universityId);
     }
+
+    @Override
+    public void deleteById(int id) {
+          String query = "delete from universities where id = ?";
+          jdbcTemplate.update(query, id);
+    }
 }

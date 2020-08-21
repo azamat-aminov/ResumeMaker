@@ -32,4 +32,8 @@ public class EducationDegreeService {
         educationDegreeDao.deleteByUniversityId(id);
     }
 
+    public void deleteById(int id){
+        educationDegreeDao.deleteById(id);
+    }
+
 }

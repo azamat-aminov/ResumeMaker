@@ -162,6 +162,7 @@ public class ResumeController {
 
     @GetMapping("/delete/{id}")
     public String deletePerson(@PathVariable int id, Model model) {
+        educationDegreeService.deleteById(id);
         personService.deletePerson(id);
         model.addAttribute("data", personService.getAllData());
         return "resumes";
