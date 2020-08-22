@@ -19,4 +19,12 @@ public class WorkPlaceService {
     public List<WorkPlace> getWorkPlacesById(int id) {
         return workPlaceDao.getWorkPlacesById(id);
     }
+
+    public void updateWorkplace(List<WorkPlace> workPlaces) {
+        workPlaceDao.updateWorkplace(workPlaces);
+    }
+
+    public void deleteByWorkplaceId(int workplaceId) {
+        workPlaceDao.deleteByWorkplaceId(workplaceId);
+    }
 }

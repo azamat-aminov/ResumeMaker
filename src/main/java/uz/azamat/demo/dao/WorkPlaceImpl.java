@@ -40,4 +40,27 @@ public class WorkPlaceImpl implements WorkPlaceDao {
         String query = "select * from workplaces where id = " + id;
         return jdbcTemplate.query(query, new WorkPlaceRowMapper());
     }
+
+    @Override
+    public void updateWorkplace(List<WorkPlace> workPlaces) {
+        String query = "update workplaces set name=? where workplace_id=?";
+        jdbcTemplate.batchUpdate(query, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, workPlaces.get(i).getWorkPlaceName());
+                ps.setInt(2, workPlaces.get(i).getWorkPlaceId());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return workPlaces.size();
+            }
+        });
+    }
+
+    @Override
+    public void deleteByWorkplaceId(int workplaceId) {
+        String query = "delete from workplaces where workplace_id=?";
+        jdbcTemplate.update(query, workplaceId);
+    }
 }

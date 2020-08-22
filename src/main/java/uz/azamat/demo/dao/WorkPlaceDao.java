@@ -9,4 +9,7 @@ public interface WorkPlaceDao {
 
 
     List<WorkPlace> getWorkPlacesById(int id);
+
+    void updateWorkplace(List<WorkPlace> workPlaces);
+    void deleteByWorkplaceId(int workplaceId);
 }
