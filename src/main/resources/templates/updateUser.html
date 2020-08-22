@@ -16,7 +16,7 @@
     <input type="text" th:field="*{nationality}" id="nation" maxlength="100"><br>
 
     <div th:object="${educationDegree}">
-        <table>
+        <table class="edu-table">
             <thead>
             <tr>
                 <th><input class='check_all' type='checkbox' onclick="select_all()"/></th>
@@ -39,6 +39,26 @@
         <button type="button" class='addMore'>Add More</button>
     </div>
 
+    <div th:object="${workPlace}">
+        <table class="work-table">
+            <thead>
+            <tr>
+                <th><input class='check_all2' type='checkbox' onclick="select_all2()"/></th>
+                <th>Workplaces</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="work : ${workPlaces}">
+                <td><input type='checkbox' class='case2'/></td>
+                <td><input type="text" th:value="${work.workPlaceName}" name="workPlaceName"/></td>
+                <td><input type="hidden" th:value="${work.workPlaceId}" name="workPlaceId"/></td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="button" class='delete2'>Delete2</button>
+        <button type="button" class='addMore2'>Add More2</button>
+    </div>
+
     <label for="number">Телефон</label>
     <input type="number" th:field="*{phoneNumber}" id="number"><br>
 
@@ -58,7 +78,7 @@
             "<td><input type='text' id='graduatedYear' name='graduatedYear'/></td>" +
             "<td><input type='text' id='degree' name='degree'/></td> " +
             "<td><input type='hidden' id='degreeId' name='degreeId'></td></tr>";
-        $('table').append(data);
+        $('table.edu-table').append(data);
     });
 
     $(".delete").on('click', function () {
@@ -78,6 +98,39 @@
     }
 
     function check() {
+        obj = $('table tr').find('span');
+        $.each(obj, function (key, value) {
+            id = value.id;
+            $('#' + id).html(key + 1);
+        });
+    }
+
+
+    $(".addMore2").on('click', function () {
+        let data2 = "<tr>" +
+            "<td><input type='checkbox' class='case2'/></td>";
+        data2 += "<td><input type='text' id='workPlaceName' name='workPlaceName'/></td> " +
+            "<td><input type='hidden' id='workPlaceId' name='workPlaceId'></td></tr>";
+        $('table.work-table').append(data2);
+    });
+
+    $(".delete2").on('click', function () {
+        $('.case2:checkbox:checked').parents("tr").remove();
+        $('.check_all2').prop("checked", false);
+        check2();
+    });
+
+    function select_all2() {
+        $('input[class=case2]:checkbox').each(function () {
+            if ($('input[class=check_all2]:checkbox:checked').length === 0) {
+                $(this).prop("checked", false);
+            } else {
+                $(this).prop("checked", true);
+            }
+        });
+    }
+
+    function check2() {
         obj = $('table tr').find('span');
         $.each(obj, function (key, value) {
             id = value.id;
