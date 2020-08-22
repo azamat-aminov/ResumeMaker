@@ -34,4 +34,10 @@ public class WorkPlaceImpl implements WorkPlaceDao {
             }
         });
     }
+
+    @Override
+    public List<WorkPlace> getWorkPlacesById(int id) {
+        String query = "select * from workplaces where id = " + id;
+        return jdbcTemplate.query(query, new WorkPlaceRowMapper());
+    }
 }

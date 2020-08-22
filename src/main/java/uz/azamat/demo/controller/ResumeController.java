@@ -91,8 +91,10 @@ public class ResumeController {
     public String findById(@PathVariable int id, Model model) {
         Person person = personService.findById(id);
         List<EducationDegree> educationDegrees = educationDegreeService.eduFindById(id);
+        List<WorkPlace> workPlaces = workPlaceService.getWorkPlacesById(id);
         model.addAttribute("person", person);
         model.addAttribute("universities", educationDegrees);
+        model.addAttribute("workPlaces", workPlaces);
         return "updateUser";
     }
 

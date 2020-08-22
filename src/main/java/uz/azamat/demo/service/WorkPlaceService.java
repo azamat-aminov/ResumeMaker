@@ -15,4 +15,8 @@ public class WorkPlaceService {
     public void save(List<WorkPlace> workPlaces, int id) {
         workPlaceDao.save(workPlaces, id);
     }
+
+    public List<WorkPlace> getWorkPlacesById(int id) {
+        return workPlaceDao.getWorkPlacesById(id);
+    }
 }
