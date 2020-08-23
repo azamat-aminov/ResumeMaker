@@ -3,54 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <title>Fill the forms</title>
+    <link th:href="@{/js/css/person.css}" rel="stylesheet"/>
 </head>
 <body>
-<form action="#" th:action="@{/savePerson}" method="post">
-    <label for="name">Ф.И.Ш</label>
-    <input type="text" name="fullName" id="name" maxlength="250"><br>
+<div class="container">
+    <form action="#" th:action="@{/savePerson}" method="post">
 
-    <label for="date">Тўғилган сана</label>
-    <input type="date" name="dateOfBirth" id="date"><br>
+        <div class="row">
+            <div class="col-25">
+                <label for="name">Ф.И.Ш</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="fullName" id="name" maxlength="250"><br>
+            </div>
+        </div>
 
-    <label for="nation">Миллати</label>
-    <input type="text" name="nationality" id="nation" maxlength="100"><br>
+        <div class="row">
+            <div class="col-25">
+                <label for="date">Тўғилган сана</label>
+            </div>
+            <div class="col-75">
+                <input type="date" name="dateOfBirth" id="date"><br>
+            </div>
+        </div>
 
-    <!--here educated universities-->
-    <div style="background-color: cornsilk" id="items">
-        <label for="university">Университет</label>
-        <input type="text" name="universityName" id="university">
-        <label for="graduated">Тугатган йили</label><input type="date" name="graduatedYear" id="graduated">
-        <label for="degree">Маьлумоти</label><input type="text" name="degree" id="degree">
-    </div>
-    <input type="button" value="Қўшиш" id="add">
+        <div class="row">
+            <div class="col-25">
+                <label for="nation">Миллати</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="nationality" id="nation" maxlength="100"><br>
+            </div>
+        </div>
 
-    <br>
-    <label for="number">Телефон</label>
-    <input type="text" name="phoneNumber" id="number"><br>
+        <!--here educated universities-->
+        <div id="items">
+            <div class="row">
+                <div class="col-25">
+                    <label for="university">Университет</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="universityName" id="university">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="graduated">Тугатган йили</label>
+                </div>
+                <div class="col-75">
+                    <input type="date" name="graduatedYear" id="graduated">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="degree">Маьлумоти</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="degree" id="degree">
+                </div>
+            </div>
+        </div>
 
-    <label for="email">Почта манзили</label>
-    <input type="email" name="email" id="email"><br>
-    <div id="items2">
-        <label for="workPlaceName">Ишлаган жойлари</label>
-        <input type="text" name="workPlaceName" id="workPlaceName">
-    </div>
-    <input type="button" value="Қўшиш" id="add2"><br>
+        <div class="row">
+            <div class="col-25">
+                <!--            <label for="button">Қўшиш</label>-->
+            </div>
+            <div class="col-75">
+                <input type="button" value="Қўшиш" id="add">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="number">Телефон</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="phoneNumber" id="number"><br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="email">Почта манзили</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="email" id="email"><br>
+            </div>
+        </div>
 
 
-    <input type="submit" name="submit" value="Тасдиқлаш">
-    <input type="button" onclick="location.href='/getAllData'" value="Барча резюмелар"/>
-</form>
+        <div id="items2">
+            <div class="row">
+                <div class="col-25">
+                    <label for="workPlaceName">Ишлаган жойлари</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="workPlaceName" id="workPlaceName">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+            </div>
+            <div class="col-75">
+                <input type="button" value="Қўшиш" id="add2"><br>
+            </div>
+        </div>
 
+        <div class="row">
+            <input type="submit" name="submit" value="Тасдиқлаш">
+        </div>
+        <input type="button" onclick="location.href='/getAllData'" value="Барча резюмелар"/>
+    </form>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
     $(document).ready(function () {
         $("#add").click(function (e) {
             event.preventDefault()
-            $('#items').append('<div><input type="text" name="' + 'universityName' + '" id="university">' +
-                '<input type="date" name="' + 'graduatedYear' + '"id="graduated">' +
-                '<input type="text" name="' + 'degree' + '"id="degree">' +
-                '<input type="button" value="Ўчириш" id="delete"></div>');
+            $('#items').append('<div><div class="row">\n' +
+                '            <div class="col-25">\n' +
+                '            </div>\n' +
+                '            <div class="col-75">\n' +
+                '                <input type="text" name="' + 'universityName' + '" id="university">\n' +
+                '            </div>\n' +
+                '        </div>' +
+                ' <div class="row">\n' +
+                '            <div class="col-25">\n' +
+                '            </div>\n' +
+                '            <div class="col-75">\n' +
+                '               <input type="date" name="' + 'graduatedYear' + '"id="graduated">\n' +
+                '            </div>\n' +
+                '        </div>' +
+                ' <div class="row">\n' +
+                '            <div class="col-25">\n' +
+                '            </div>\n' +
+                '            <div class="col-75">\n' +
+                '                <input type="text" name="' + 'degree' + '"id="degree">\n' +
+                '            </div>\n' +
+                '        </div>' +
+                '<div class="row">\n' +
+                '            <div class="col-25">\n' +
+                '            </div>\n' +
+                '            <div class="col-75">\n' +
+                '                <input type="button" value="Ўчириш" id="delete">\n' +
+                '            </div>\n' +
+                '        </div></div>');
         });
         $('body').on('click', '#delete', function (e) {
             $(this).parent('div').remove();
@@ -60,8 +159,20 @@
     $(document).ready(function () {
         $("#add2").click(function (e) {
             event.preventDefault()
-            $('#items2').append('<div><input type="text" name="' + 'workPlaceName' + '" id="workPlaceName">' +
-                '<input type="button" value="Ўчириш" id="delete2"></div>');
+            $('#items2').append('<div> <div class="row">\n' +
+                '            <div class="col-25">\n' +
+                '            </div>\n' +
+                '            <div class="col-75">\n' +
+                '                <input type="text" name="' + 'workPlaceName' + '" id="workPlaceName">\n' +
+                '            </div>\n' +
+                '        </div>' +
+                '<div class="row">\n' +
+                '            <div class="col-25">\n' +
+                '            </div>\n' +
+                '            <div class="col-75">\n' +
+                '                <input type="button" value="Ўчириш" id="delete2">\n' +
+                '            </div>\n' +
+                '        </div></div>');
         });
         $('body').on('click', '#delete2', function (e) {
             $(this).parent('div').remove();
