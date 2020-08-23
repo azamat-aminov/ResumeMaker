@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Resumes table</title>
+    <link th:href="@{/js/css/resumes.css}" rel="stylesheet"/>
 </head>
 <body>
 <div th:if="${not #lists.isEmpty(data)}">
-    <h2>Resumes</h2>
-    <table>
+    <h3>Мавжуд резюмелар</h3>
+    <table id="customers">
         <tr>
             <th>Ф.И.Ш</th>
             <th>Тўғилган сана</th>
-            <th>Миллати</th>
             <th>Телефон</th>
             <th>Почта манзили</th>
             <th>Таҳрирлаш</th>
@@ -20,14 +20,13 @@
         <tr th:each="person :${data}" th:onclick="|window.location = '/data/by/' + ${person.id}">
             <td th:utext="${person.fullName}"></td>
             <td th:utext="${person.dateOfBirth}"></td>
-            <td th:utext="${person.nationality}"></td>
             <td th:utext="${person.phoneNumber}"></td>
             <td th:utext="${person.email}"></td>
-            <td><a th:href="@{/edit/{id}(id=${person.id})}">Таҳрирлаш</a></td>
-            <td><a th:href="@{/delete/{id}(id=${person.id})}">Ўчириш</a></td>
+            <td><a th:href="@{/edit/{id}(id=${person.id})}"><input type="button" value="Таҳрирлаш" id="refactor"></a></td>
+            <td><a th:href="@{/delete/{id}(id=${person.id})}"><input type="button" value="Ўчириш" id="delete"></a></td>
         </tr>
     </table>
-    <p><a th:href="@{/createPerson}">Резюме қўшиш</a></p>
+    <p><a th:href="@{/createPerson}"><input type="button" value="Резуме қўшиш" class="addNewResume"></a></p>
 </div>
 </body>
 </html>
