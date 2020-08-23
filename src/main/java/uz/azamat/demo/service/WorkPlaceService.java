@@ -27,4 +27,8 @@ public class WorkPlaceService {
     public void deleteByWorkplaceId(int workplaceId) {
         workPlaceDao.deleteByWorkplaceId(workplaceId);
     }
+
+    public void deleteById(int id) {
+        workPlaceDao.deleteById(id);
+    }
 }

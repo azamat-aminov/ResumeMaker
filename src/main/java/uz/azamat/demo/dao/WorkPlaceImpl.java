@@ -63,4 +63,10 @@ public class WorkPlaceImpl implements WorkPlaceDao {
         String query = "delete from workplaces where workplace_id=?";
         jdbcTemplate.update(query, workplaceId);
     }
+
+    @Override
+    public void deleteById(int id) {
+        String query = "delete from workplaces where id = ?";
+      jdbcTemplate.update(query, id);
+    }
 }

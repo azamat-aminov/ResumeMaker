@@ -12,4 +12,5 @@ public interface WorkPlaceDao {
 
     void updateWorkplace(List<WorkPlace> workPlaces);
     void deleteByWorkplaceId(int workplaceId);
+    void deleteById(int id);
 }
