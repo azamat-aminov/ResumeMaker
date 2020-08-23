@@ -3,55 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>About person</title>
+    <link th:href="@{/js/css/onePersonInfo.css}" rel="stylesheet"/>
 </head>
 <body>
-<h2>Резюме</h2>
-<table>
-    <tr th:each="data : ${onePerson}">
-        <th>Ф.И.Ш</th>
-        <td th:utext="${data.fullName}"></td>
-    </tr>
-    <tr th:each="data : ${onePerson}">
-        <th>Тўғилган сана</th>
-        <td th:utext="${data.dateOfBirth}"></td>
-    </tr>
-    <tr th:each="data : ${onePerson}">
-        <th>Миллати</th>
-        <td th:utext="${data.nationality}"></td>
-    </tr>
-    <tr th:each="data : ${onePerson}">
-        <th>Телефон</th>
-        <td th:utext="${data.phoneNumber}"></td>
-    </tr>
-    <tr th:each="data : ${onePerson}">
-        <th>Почта манзили</th>
-        <td th:utext="${data.email}"></td>
-    </tr>
-</table>
+<div class="all-table">
+   <div class="all-table-2">
+       <h2>Резюме</h2>
+       <table class="table-1">
+           <tr th:each="data : ${onePerson}">
+               <th>Ф.И.Ш</th>
+               <td th:utext="${data.fullName}"></td>
+           </tr>
+           <tr th:each="data : ${onePerson}">
+               <th>Тўғилган сана</th>
+               <td th:utext="${data.dateOfBirth}"></td>
+           </tr>
+           <tr th:each="data : ${onePerson}">
+               <th>Миллати</th>
+               <td th:utext="${data.nationality}"></td>
+           </tr>
+           <tr th:each="data : ${onePerson}">
+               <th>Телефон</th>
+               <td th:utext="${data.phoneNumber}"></td>
+           </tr>
+           <tr th:each="data : ${onePerson}">
+               <th>Почта манзили</th>
+               <td th:utext="${data.email}"></td>
+           </tr>
+       </table>
 
-<div th:if="${not #lists.isEmpty(degrees)}">
-    <table>
-        <tr>
-            <th>Ўқиш жойлари</th>
-            <th>Тамомлаган йили</th>
-            <th>Маълумоти</th>
-        </tr>
-        <tr th:each="edu :${degrees}">
-            <td th:utext="${edu.universityName}"></td>
-            <td th:utext="${edu.graduatedYear}"></td>
-            <td th:utext="${edu.degree}"></td>
-        </tr>
-    </table>
-</div>
-<div th:if="${not #lists.isEmpty(works)}">
-    <table>
-        <tr>
-            <th>Ишлаган жойлари</th>
-        </tr>
-        <tr th:each="work :${works}">
-            <td th:utext="${work.workPlaceName}"></td>
-        </tr>
-    </table>
+       <div th:if="${not #lists.isEmpty(degrees)}">
+           <table class="table-2">
+               <tr>
+                   <th>Ўқиш жойлари</th>
+                   <th>Тамомлаган йили</th>
+                   <th>Маълумоти</th>
+               </tr>
+               <tr th:each="edu :${degrees}">
+                   <td th:utext="${edu.universityName}"></td>
+                   <td th:utext="${edu.graduatedYear}"></td>
+                   <td th:utext="${edu.degree}"></td>
+               </tr>
+           </table>
+       </div>
+       <div th:if="${not #lists.isEmpty(works)}">
+           <table class="table-3">
+               <tr>
+                   <th>Ишлаган жойлари</th>
+               </tr>
+               <tr th:each="work :${works}">
+                   <td th:utext="${work.workPlaceName}"></td>
+               </tr>
+           </table>
+       </div>
+       <input type="button" id="prev" onclick="location.href='/getAllData'" value="Орқага"/>
+   </div>
 </div>
 </body>
 </html>

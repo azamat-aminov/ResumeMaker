@@ -1,0 +1,106 @@
+.table-1 {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-1 td, .table-1 th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table-1 tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-1 tr:hover {
+    background-color: #ddd;
+}
+
+.table-1 th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.table-2 {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-2 td, .table-2 th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table-2 tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-2 tr:hover {
+    background-color: #ddd;
+}
+
+.table-2 th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.table-3 {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-3 td, .table-3 th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table-3 tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-3 tr:hover {
+    background-color: #ddd;
+}
+
+.table-3 th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.all-table {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 40px;
+    margin: 10px 40px 15px 40px;
+}
+.all-table-2 {
+    margin: 10px 200px 20px 200px;
+}
+
+#prev {
+    background-color: #0050d1;
+    color: white;
+    margin-top: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+}
+
+#prev:hover {
+    background-color: #20252e;
+    color: #f5f5f5;
+}
