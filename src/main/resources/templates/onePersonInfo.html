@@ -4,60 +4,80 @@
     <meta charset="UTF-8">
     <title>About person</title>
     <link th:href="@{/js/css/onePersonInfo.css}" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 </head>
 <body>
 <div class="all-table">
-   <div class="all-table-2">
-       <h2>Резюме</h2>
-       <table class="table-1">
-           <tr th:each="data : ${onePerson}">
-               <th>Ф.И.Ш</th>
-               <td th:utext="${data.fullName}"></td>
-           </tr>
-           <tr th:each="data : ${onePerson}">
-               <th>Тўғилган сана</th>
-               <td th:utext="${data.dateOfBirth}"></td>
-           </tr>
-           <tr th:each="data : ${onePerson}">
-               <th>Миллати</th>
-               <td th:utext="${data.nationality}"></td>
-           </tr>
-           <tr th:each="data : ${onePerson}">
-               <th>Телефон</th>
-               <td th:utext="${data.phoneNumber}"></td>
-           </tr>
-           <tr th:each="data : ${onePerson}">
-               <th>Почта манзили</th>
-               <td th:utext="${data.email}"></td>
-           </tr>
-       </table>
+    <button id="download">Юклаб олиш</button>
+    <div class="all-table-2" id="invoice">
+        <h2>Резюме</h2>
+        <table class="table-1">
+            <tr th:each="data : ${onePerson}">
+                <th>Ф.И.Ш</th>
+                <td th:utext="${data.fullName}"></td>
+            </tr>
+            <tr th:each="data : ${onePerson}">
+                <th>Тўғилган сана</th>
+                <td th:utext="${data.dateOfBirth}"></td>
+            </tr>
+            <tr th:each="data : ${onePerson}">
+                <th>Миллати</th>
+                <td th:utext="${data.nationality}"></td>
+            </tr>
+            <tr th:each="data : ${onePerson}">
+                <th>Телефон</th>
+                <td th:utext="${data.phoneNumber}"></td>
+            </tr>
+            <tr th:each="data : ${onePerson}">
+                <th>Почта манзили</th>
+                <td th:utext="${data.email}"></td>
+            </tr>
+        </table>
 
-       <div th:if="${not #lists.isEmpty(degrees)}">
-           <table class="table-2">
-               <tr>
-                   <th>Ўқиш жойлари</th>
-                   <th>Тамомлаган йили</th>
-                   <th>Маълумоти</th>
-               </tr>
-               <tr th:each="edu :${degrees}">
-                   <td th:utext="${edu.universityName}"></td>
-                   <td th:utext="${edu.graduatedYear}"></td>
-                   <td th:utext="${edu.degree}"></td>
-               </tr>
-           </table>
-       </div>
-       <div th:if="${not #lists.isEmpty(works)}">
-           <table class="table-3">
-               <tr>
-                   <th>Ишлаган жойлари</th>
-               </tr>
-               <tr th:each="work :${works}">
-                   <td th:utext="${work.workPlaceName}"></td>
-               </tr>
-           </table>
-       </div>
-       <input type="button" id="prev" onclick="location.href='/getAllData'" value="Орқага"/>
-   </div>
+        <div th:if="${not #lists.isEmpty(degrees)}">
+            <table class="table-2">
+                <tr>
+                    <th>Ўқиш жойлари</th>
+                    <th>Тамомлаган йили</th>
+                    <th>Маълумоти</th>
+                </tr>
+                <tr th:each="edu :${degrees}">
+                    <td th:utext="${edu.universityName}"></td>
+                    <td th:utext="${edu.graduatedYear}"></td>
+                    <td th:utext="${edu.degree}"></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${not #lists.isEmpty(works)}">
+            <table class="table-3">
+                <tr>
+                    <th>Ишлаган жойлари</th>
+                </tr>
+                <tr th:each="work :${works}">
+                    <td th:utext="${work.workPlaceName}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <input type="button" id="prev" onclick="location.href='/getAllData'" value="Орқага"/>
 </div>
+<script>
+    window.onload = function (){
+        document.getElementById("download")
+            .addEventListener("click",()=>{
+                const invoice = this.document.getElementById("invoice");
+                console.log(invoice);
+                console.log(window);
+                const opt = {
+                    margin: 1,
+                    filename: 'Resume.pdf',
+                    image: {type: 'jpeg', quality: 1.98},
+                    html2canvas: {scale: 2},
+                    jsPDF: {unit: 'in', format: 'letter', orientation: 'portrait'}
+                };
+                html2pdf().from(invoice).set(opt).save();
+            })
+    }
+</script>
 </body>
 </html>
