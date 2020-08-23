@@ -75,8 +75,7 @@ public class ResumeController {
         }
         for (String s : workPlacesArray) {
             WorkPlace workPlace = new WorkPlace();
-            String workPlaceName = s;
-            workPlace.setWorkPlaceName(workPlaceName);
+            workPlace.setWorkPlaceName(s);
             workPlaces.add(workPlace);
         }
         personService.save(person);
@@ -105,19 +104,80 @@ public class ResumeController {
             person.setId(id);
             return "updateUser";
         }
-        List<EducationDegree> educationDegrees = new ArrayList<>();
         Map<String, String[]> parameterMap = request.getParameterMap();
+
+
+        deleteEdu(id, parameterMap);
+        deleteWork(id, parameterMap);
+        List<WorkPlace> mainWorkPlacesList = updateOrSaveWorkplaces(id, parameterMap);
+        List<EducationDegree> educationDegrees = updateOrSaveEdu(id, parameterMap);
+
+
+        personService.updatePerson(person, id);
+        educationDegreeService.updateDegree(educationDegrees);
+        workPlaceService.updateWorkplace(mainWorkPlacesList);
+        model.addAttribute("data", personService.getAllData());
+        return "resumes";
+    }
+
+    private void deleteWork(int id, Map<String, String[]> parameterMap) {
+        String[] workplacesIds = parameterMap.get("workPlaceId");
+        List<Integer> workPlaceListIds = new ArrayList<>();
+        List<Integer> getAllWorkplaceIds = new ArrayList<>();
+        List<WorkPlace> allInfoAboutWorkplace = workPlaceService.getWorkPlacesById(id);
+        for (WorkPlace place : allInfoAboutWorkplace) {
+            getAllWorkplaceIds.add(place.getWorkPlaceId());
+        }
+        for (String s : workplacesIds) {
+            if (!s.equals("")) {
+                workPlaceListIds.add(Integer.valueOf(s));
+            }
+        }
+        if (workPlaceListIds.size() < getAllWorkplaceIds.size()) {
+            List<Integer> deletedWorkplaces = new ArrayList<>(getAllWorkplaceIds);
+            deletedWorkplaces.removeAll(workPlaceListIds);
+            for (int del : deletedWorkplaces) {
+                workPlaceService.deleteByWorkplaceId(del);
+            }
+        }
+    }
+
+    private void deleteEdu(int id, Map<String, String[]> parameterMap) {
+        String[] ids = parameterMap.get("degreeId");
+        System.out.println(Arrays.toString(ids));
+        List<Integer> listIds = new ArrayList<>();
+        List<Integer> getAllIds = new ArrayList<>();
+
+        List<EducationDegree> allInfoAboutEdu = educationDegreeService.eduFindById(id);
+        for (EducationDegree deg : allInfoAboutEdu) {
+            getAllIds.add(deg.getUniversityId());
+        }
+        for (String s : ids) {
+            if (!s.equals("")) {
+                listIds.add(Integer.valueOf(s));
+            }
+        }
+        if (listIds.size() < getAllIds.size()) {
+            List<Integer> deletedId = new ArrayList<>(getAllIds);
+            deletedId.removeAll(listIds);
+            for (int del : deletedId) {
+                educationDegreeService.deleteByUniversityId(del);
+            }
+        }
+    }
+
+    private List<EducationDegree> updateOrSaveEdu(int id, Map<String, String[]> parameterMap) {
         String[] universityNames = parameterMap.get("universityName");
         String[] gradYear = parameterMap.get("graduatedYear");
         String[] degrees = parameterMap.get("degree");
         String[] ids = parameterMap.get("degreeId");
-        System.out.println(Arrays.toString(universityNames));
-        System.out.println(Arrays.toString(ids));
 
+        List<EducationDegree> educationDegrees = new ArrayList<>();
         for (int i = 0; i < universityNames.length; i++) {
             EducationDegree edu = new EducationDegree();
             String universityName = universityNames[i];
             String graduatedYear = gradYear[i];
+
             String degree = degrees[i];
             String degreeId = ids[i];
 
@@ -145,33 +205,32 @@ public class ResumeController {
                 educationDegrees.add(edu);
             }
         }
-//         delete logic
-        List<Integer> listIds = new ArrayList<>();
-        List<Integer> getAllIds = new ArrayList<>();
+        return educationDegrees;
+    }
 
-        List<EducationDegree> allInfoAboutEdu = educationDegreeService.eduFindById(id);
-        for (EducationDegree deg : allInfoAboutEdu) {
-            getAllIds.add(deg.getUniversityId());
-        }
-        for (String s : ids) {
-            if (!s.equals("")) {
-                listIds.add(Integer.valueOf(s));
+    private List<WorkPlace> updateOrSaveWorkplaces(int id, Map<String, String[]> parameterMap) {
+        String[] workplaces = parameterMap.get("workPlaceName");
+        String[] workplacesIds = parameterMap.get("workPlaceId");
+
+        List<WorkPlace> mainWorkPlacesList = new ArrayList<>();
+        for (int k = 0; k < workplaces.length; k++) {
+            WorkPlace workPlace = new WorkPlace();
+            String workplacesNames = workplaces[k];
+            String workplacesId = workplacesIds[k];
+            if (workplacesIds[k].equals("") || workplacesIds[k].isEmpty()) {
+                List<WorkPlace> workPlaceList = new ArrayList<>();
+                WorkPlace newWorkPlace = new WorkPlace();
+                String newWorkplaceName = workplaces[k];
+                newWorkPlace.setWorkPlaceName(newWorkplaceName);
+                workPlaceList.add(newWorkPlace);
+                workPlaceService.save(workPlaceList, id);
+            } else {
+                workPlace.setWorkPlaceName(workplacesNames);
+                workPlace.setWorkPlaceId(Integer.parseInt(workplacesId));
+                mainWorkPlacesList.add(workPlace);
             }
         }
-        if (listIds.size() < getAllIds.size()) {
-            List<Integer> deletedId = new ArrayList<>(getAllIds);
-            deletedId.removeAll(listIds);
-            for (int del : deletedId) {
-                educationDegreeService.deleteByUniversityId(del);
-            }
-
-        }
-
-
-        personService.updatePerson(person, id);
-        educationDegreeService.updateDegree(educationDegrees);
-        model.addAttribute("data", personService.getAllData());
-        return "resumes";
+        return mainWorkPlacesList;
     }
 
     @GetMapping("/delete/{id}")
