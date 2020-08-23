@@ -7,14 +7,16 @@
 </head>
 <body>
 <div class="container">
-    <form action="#" th:action="@{/savePerson}" method="post">
+    <form action="#" th:action="@{/savePerson}" method="post" name="form1">
 
         <div class="row">
             <div class="col-25">
                 <label for="name">Ф.И.Ш</label>
             </div>
             <div class="col-75">
-                <input type="text" name="fullName" id="name" maxlength="250" placeholder="Ф.И.Ш..."><br>
+                <input type="text" name="fullName" id="name" maxlength="250" placeholder="Ф.И.Ш..." required
+                oninvalid="this.setCustomValidity('Илтимос исмингизни киритинг')"
+                oninput="setCustomValidity('')"><br>
             </div>
         </div>
 
@@ -23,7 +25,9 @@
                 <label for="date">Тўғилган сана</label>
             </div>
             <div class="col-75">
-                <input type="date" name="dateOfBirth" id="date"><br>
+                <input type="date" name="dateOfBirth" id="date" required
+                       oninvalid="this.setCustomValidity('Илтимос туғилган санангизни киритинг')"
+                       oninput="setCustomValidity('')">
             </div>
         </div>
 
@@ -86,7 +90,9 @@
                 <label for="email">Почта манзили</label>
             </div>
             <div class="col-75">
-                <input type="text" name="email" id="email" placeholder="email@address.com"><br>
+                <input type="email" name="email" id="email" placeholder="email@address.com"
+                       oninvalid="this.setCustomValidity('Илтимос эмаилни тўғри киритинг')"
+                       oninput="setCustomValidity('')"><br>
             </div>
         </div>
 
@@ -179,6 +185,7 @@
             $(this).parent('div').parent('div').parent('div').remove();
         });
     });
+
 </script>
 </body>
 </html>
