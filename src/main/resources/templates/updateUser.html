@@ -3,71 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>Update User</title>
+    <link th:href="@{/js/css/updateUser.css}" rel="stylesheet"/>
 </head>
 <body>
-<form action="#" th:action="@{/update/{id}(id=${person.id})}" th:object="${person}" method="post">
-    <label for="name">Ф.И.Ш</label>
-    <input type="text" th:field="*{fullName}" id="name" maxlength="250"><br>
+<div class="container">
+    <form action="#" th:action="@{/update/{id}(id=${person.id})}" th:object="${person}" method="post">
+        <div class="row">
+            <div class="col-25">
+                <label for="name">Ф.И.Ш</label>
+            </div>
+            <div class="col-75">
+                <input type="text" th:field="*{fullName}" id="name" maxlength="250"><br>
+            </div>
+        </div>
 
-    <label for="date">Тўғилган сана</label>
-    <input type="date" th:field="*{dateOfBirth}" id="date"><br>
+        <div class="row">
+            <div class="col-25">
+                <label for="date">Тўғилган сана</label>
+            </div>
+            <div class="col-75">
+                <input type="date" th:field="*{dateOfBirth}" id="date"><br>
+            </div>
+        </div>
 
-    <label for="nation">Миллати</label>
-    <input type="text" th:field="*{nationality}" id="nation" maxlength="100"><br>
 
-    <div th:object="${educationDegree}">
-        <table class="edu-table">
-            <thead>
-            <tr>
-                <th><input class='check_all' type='checkbox' onclick="select_all()"/></th>
-                <th>University</th>
-                <th>Graduated year</th>
-                <th>Degree</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="data : ${universities}">
-                <td><input type='checkbox' class='case'/></td>
-                <td><input type="text" th:value="${data.universityName}" name="universityName"/></td>
-                <td><input type="text" th:value="${data.graduatedYear}" name="graduatedYear"/></td>
-                <td><input type="text" th:value="${data.degree}" name="degree"/></td>
-                <td><input type="hidden" th:value="${data.universityId}" name="degreeId"/></td>
-            </tr>
-            </tbody>
-        </table>
-        <button type="button" class='delete'>Delete</button>
-        <button type="button" class='addMore'>Add More</button>
-    </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="nation">Миллати</label>
+            </div>
+            <div class="col-75">
+                <input type="text" th:field="*{nationality}" id="nation" maxlength="100"><br>
+            </div>
+        </div>
 
-    <div th:object="${workPlace}">
-        <table class="work-table">
-            <thead>
-            <tr>
-                <th><input class='check_all2' type='checkbox' onclick="select_all2()"/></th>
-                <th>Workplaces</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="work : ${workPlaces}">
-                <td><input type='checkbox' class='case2'/></td>
-                <td><input type="text" th:value="${work.workPlaceName}" name="workPlaceName"/></td>
-                <td><input type="hidden" th:value="${work.workPlaceId}" name="workPlaceId"/></td>
-            </tr>
-            </tbody>
-        </table>
-        <button type="button" class='delete2'>Delete2</button>
-        <button type="button" class='addMore2'>Add More2</button>
-    </div>
+        <div th:object="${educationDegree}">
+            <table class="edu-table">
+                <thead>
+                <tr>
+                    <th><input class='check_all' type='checkbox' onclick="select_all()"/></th>
+                    <th>Университет</th>
+                    <th>Тугатган йили</th>
+                    <th>Маьлумоти</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="data : ${universities}">
+                    <td><input type='checkbox' class='case'/></td>
+                    <td><input type="text" th:value="${data.universityName}" name="universityName"/></td>
+                    <td><input type="date" th:value="${data.graduatedYear}" name="graduatedYear"/></td>
+                    <td><input type="text" th:value="${data.degree}" name="degree"/></td>
+                    <td><input type="hidden" th:value="${data.universityId}" name="degreeId"/></td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="button" class='delete' id="del-edu">Ўчириш</button>
+            <button type="button" class='addMore' id="add-edu">Қўшиш</button>
+        </div>
 
-    <label for="number">Телефон</label>
-    <input type="number" th:field="*{phoneNumber}" id="number"><br>
+        <div th:object="${workPlace}">
+            <table class="work-table">
+                <thead>
+                <tr>
+                    <th><input class='check_all2' type='checkbox' onclick="select_all2()"/></th>
+                    <th>Ишлаган жойлари</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="work : ${workPlaces}">
+                    <td><input type='checkbox' class='case2'/></td>
+                    <td><input type="text" th:value="${work.workPlaceName}" name="workPlaceName"/></td>
+                    <td><input type="hidden" th:value="${work.workPlaceId}" name="workPlaceId"/></td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="button" class='delete2' id="del-work">Ўчириш</button>
+            <button type="button" class='addMore2' id="add-work">Қўшиш</button>
+        </div>
 
-    <label for="email">Почта манзили</label>
-    <input type="email" th:field="*{email}" id="email"><br>
-    <input type="submit" name="submit" value="Тасдиқлаш">
-</form>
-<button onclick="location.href='/getAllData'">Орқага</button>
+        <div class="row">
+            <div class="col-25">
+                <label for="number">Телефон</label>
+            </div>
+            <div class="col-75">
+                <input type="text" th:field="*{phoneNumber}" id="number"><br>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-25">
+                <label for="email">Почта манзили</label>
+            </div>
+            <div class="col-75">
+                <input type="text" th:field="*{email}" id="email"><br>
+            </div>
+        </div>
+
+        <input type="submit" name="submit" value="Тасдиқлаш">
+    </form>
+    <button onclick="location.href='/getAllData'" id="prev">Орқага</button>
+</div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
