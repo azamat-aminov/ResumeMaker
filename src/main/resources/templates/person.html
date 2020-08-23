@@ -66,10 +66,9 @@
 
         <div class="row">
             <div class="col-25">
-                <!--            <label for="button">Қўшиш</label>-->
             </div>
             <div class="col-75">
-                <input type="button" value="Қўшиш" id="add">
+                <input type="button" value="Қўшиш" id="add" class="add">
             </div>
         </div>
 
@@ -106,14 +105,16 @@
             <div class="col-25">
             </div>
             <div class="col-75">
-                <input type="button" value="Қўшиш" id="add2"><br>
+                <input type="button" value="Қўшиш" id="add2" class="add">
             </div>
         </div>
 
         <div class="row">
             <input type="submit" name="submit" value="Тасдиқлаш">
         </div>
-        <input type="button" onclick="location.href='/getAllData'" value="Барча резюмелар"/>
+        <div class="row">
+            <input type="button" id="but" onclick="location.href='/getAllData'" value="Барча резюмелар"/>
+        </div>
     </form>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -147,7 +148,7 @@
                 '            <div class="col-25">\n' +
                 '            </div>\n' +
                 '            <div class="col-75">\n' +
-                '                <input type="button" value="Ўчириш" id="delete">\n' +
+                '                <input type="button" value="Ўчириш" id="delete" class="remove">\n' +
                 '            </div>\n' +
                 '        </div></div>');
         });
@@ -170,7 +171,7 @@
                 '            <div class="col-25">\n' +
                 '            </div>\n' +
                 '            <div class="col-75">\n' +
-                '                <input type="button" value="Ўчириш" id="delete2">\n' +
+                '                <input type="button" value="Ўчириш" id="delete2" class="remove">\n' +
                 '            </div>\n' +
                 '        </div></div>');
         });
