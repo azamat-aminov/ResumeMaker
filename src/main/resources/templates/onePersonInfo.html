@@ -28,5 +28,30 @@
         <td th:utext="${data.email}"></td>
     </tr>
 </table>
+
+<div th:if="${not #lists.isEmpty(degrees)}">
+    <table>
+        <tr>
+            <th>Ўқиш жойлари</th>
+            <th>Тамомлаган йили</th>
+            <th>Маълумоти</th>
+        </tr>
+        <tr th:each="edu :${degrees}">
+            <td th:utext="${edu.universityName}"></td>
+            <td th:utext="${edu.graduatedYear}"></td>
+            <td th:utext="${edu.degree}"></td>
+        </tr>
+    </table>
+</div>
+<div th:if="${not #lists.isEmpty(works)}">
+    <table>
+        <tr>
+            <th>Ишлаган жойлари</th>
+        </tr>
+        <tr th:each="work :${works}">
+            <td th:utext="${work.workPlaceName}"></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

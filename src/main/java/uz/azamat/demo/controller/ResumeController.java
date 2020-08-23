@@ -245,6 +245,8 @@ public class ResumeController {
     @GetMapping("/data/by/{id}")
     public String getOnePerson(@PathVariable int id, Model model) {
         model.addAttribute("onePerson", personService.findById(id));
+        model.addAttribute("degrees", educationDegreeService.eduFindById(id));
+        model.addAttribute("works", workPlaceService.getWorkPlacesById(id));
         return "onePersonInfo";
     }
 
