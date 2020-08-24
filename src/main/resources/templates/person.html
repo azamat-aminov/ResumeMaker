@@ -15,8 +15,8 @@
             </div>
             <div class="col-75">
                 <input type="text" name="fullName" id="name" maxlength="250" placeholder="Ф.И.Ш..." required
-                oninvalid="this.setCustomValidity('Илтимос исмингизни киритинг')"
-                oninput="setCustomValidity('')"><br>
+                       oninvalid="this.setCustomValidity('Илтимос исмингизни киритинг')"
+                       oninput="setCustomValidity('')"><br>
             </div>
         </div>
 
@@ -81,7 +81,9 @@
                 <label for="number">Телефон</label>
             </div>
             <div class="col-75">
-                <input type="text" name="phoneNumber" id="number" placeholder="+998*********"><br>
+                <input type="number" name="phoneNumber" id="number" placeholder="+998*********" maxlength="13"
+                       oninvalid="this.setCustomValidity('Илтимос рақам киритинг')"
+                       oninput="setCustomValidity('')"><br>
             </div>
         </div>
 
@@ -116,10 +118,19 @@
         </div>
 
         <div class="row">
-            <input type="submit" name="submit" value="Тасдиқлаш">
+            <div class="col-25">
+            </div>
+            <div class="col-75">
+                <input type="submit" name="submit" value="Тасдиқлаш">
+            </div>
         </div>
+
         <div class="row">
-            <input type="button" id="but" onclick="location.href='/getAllData'" value="Барча резюмелар"/>
+            <div class="col-25">
+            </div>
+            <div class="col-75">
+                <input type="button" id="but" onclick="location.href='/getAllData'" value="Барча резюмелар"/>
+            </div>
         </div>
     </form>
 </div>

@@ -18,7 +18,7 @@ label {
 input[type=submit] {
     background-color: #4CAF50;
     color: white;
-    margin: 3px 293px;
+    margin: 3px 0;
     padding: 12px 30px 12px 20px;
     border: none;
     border-radius: 4px;
@@ -33,13 +33,12 @@ input[type=submit]:hover {
 #but {
     background-color: #0050d1;
     color: white;
-    margin-top: -44px;
-    margin-left: 500px;
-    padding: 12px 20px;
+    margin-top: -50px;
+    padding: 12px 30px 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    float: left;
+    float: right;
 }
 
 #but:hover {
@@ -86,6 +85,9 @@ input[type=submit]:hover {
     border-radius: 2px;
     padding: 5px 5px;
 }
+.add:hover {
+    background-color: #20252e;
+}
 
 .remove {
     background-color: #bf0817;
@@ -94,8 +96,18 @@ input[type=submit]:hover {
     border-radius: 2px;
     padding: 5px 5px;
 }
+.remove:hover {
+    background-color: #20252e;
+}
 
 #email {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+#number {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;

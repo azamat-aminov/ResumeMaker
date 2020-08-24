@@ -85,7 +85,7 @@
                 <label for="number">Телефон</label>
             </div>
             <div class="col-75">
-                <input type="text" th:field="*{phoneNumber}" id="number"><br>
+                <input type="number" th:field="*{phoneNumber}" id="number" maxlength="13"><br>
             </div>
         </div>
 
@@ -94,7 +94,7 @@
                 <label for="email">Почта манзили</label>
             </div>
             <div class="col-75">
-                <input type="text" th:field="*{email}" id="email"><br>
+                <input type="email" th:field="*{email}" id="email"><br>
             </div>
         </div>
 
