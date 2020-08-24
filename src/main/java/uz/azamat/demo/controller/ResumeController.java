@@ -122,17 +122,24 @@ public class ResumeController {
 
     private void deleteWork(int id, Map<String, String[]> parameterMap) {
         String[] workplacesIds = parameterMap.get("workPlaceId");
-        List<Integer> workPlaceListIds = new ArrayList<>();
         List<Integer> getAllWorkplaceIds = new ArrayList<>();
+        List<Integer> workPlaceListIds = new ArrayList<>();
         List<WorkPlace> allInfoAboutWorkplace = workPlaceService.getWorkPlacesById(id);
         for (WorkPlace place : allInfoAboutWorkplace) {
             getAllWorkplaceIds.add(place.getWorkPlaceId());
         }
-        for (String s : workplacesIds) {
-            if (!s.equals("")) {
-                workPlaceListIds.add(Integer.valueOf(s));
+        if (workplacesIds == null) {
+            for (int i : getAllWorkplaceIds) {
+                workPlaceService.deleteByWorkplaceId(i);
+            }
+        } else {
+            for (String s : workplacesIds) {
+                if (!s.equals("")) {
+                    workPlaceListIds.add(Integer.valueOf(s));
+                }
             }
         }
+
         if (workPlaceListIds.size() < getAllWorkplaceIds.size()) {
             List<Integer> deletedWorkplaces = new ArrayList<>(getAllWorkplaceIds);
             deletedWorkplaces.removeAll(workPlaceListIds);
@@ -152,11 +159,18 @@ public class ResumeController {
         for (EducationDegree deg : allInfoAboutEdu) {
             getAllIds.add(deg.getUniversityId());
         }
-        for (String s : ids) {
-            if (!s.equals("")) {
-                listIds.add(Integer.valueOf(s));
+        if (ids == null) {
+            for (int i : getAllIds) {
+                educationDegreeService.deleteByUniversityId(i);
+            }
+        } else {
+            for (String s : ids) {
+                if (!s.equals("")) {
+                    listIds.add(Integer.valueOf(s));
+                }
             }
         }
+
         if (listIds.size() < getAllIds.size()) {
             List<Integer> deletedId = new ArrayList<>(getAllIds);
             deletedId.removeAll(listIds);
@@ -171,40 +185,42 @@ public class ResumeController {
         String[] gradYear = parameterMap.get("graduatedYear");
         String[] degrees = parameterMap.get("degree");
         String[] ids = parameterMap.get("degreeId");
-
         List<EducationDegree> educationDegrees = new ArrayList<>();
-        for (int i = 0; i < universityNames.length; i++) {
-            EducationDegree edu = new EducationDegree();
-            String universityName = universityNames[i];
-            String graduatedYear = gradYear[i];
+        if (ids != null) {
+            for (int i = 0; i < universityNames.length; i++) {
+                EducationDegree edu = new EducationDegree();
+                String universityName = universityNames[i];
+                String graduatedYear = gradYear[i];
 
-            String degree = degrees[i];
-            String degreeId = ids[i];
+                String degree = degrees[i];
+                String degreeId = ids[i];
 
 
-            if (ids[i].equals("") || ids[i].isEmpty()) {
-                List<EducationDegree> newEduDegrees = new ArrayList<>();
-                EducationDegree newEdu = new EducationDegree();
-                String newUniversityName = universityNames[i];
-                String newGraduatedYear = gradYear[i];
-                String newDegree = degrees[i];
-                newEdu.setUniversityName(newUniversityName);
-                Date date2 = Date.valueOf(newGraduatedYear);
-                newEdu.setGraduatedYear(date2);
-                newEdu.setDegree(newDegree);
-                newEduDegrees.add(newEdu);
-                educationDegreeService.save(newEduDegrees, id);
-            } else {
-                if (!graduatedYear.isEmpty()) {
-                    Date date = Date.valueOf(graduatedYear);
-                    edu.setGraduatedYear(date);
+                if (ids[i].equals("") || ids[i].isEmpty()) {
+                    List<EducationDegree> newEduDegrees = new ArrayList<>();
+                    EducationDegree newEdu = new EducationDegree();
+                    String newUniversityName = universityNames[i];
+                    String newGraduatedYear = gradYear[i];
+                    String newDegree = degrees[i];
+                    newEdu.setUniversityName(newUniversityName);
+                    Date date2 = Date.valueOf(newGraduatedYear);
+                    newEdu.setGraduatedYear(date2);
+                    newEdu.setDegree(newDegree);
+                    newEduDegrees.add(newEdu);
+                    educationDegreeService.save(newEduDegrees, id);
+                } else {
+                    if (!graduatedYear.isEmpty()) {
+                        Date date = Date.valueOf(graduatedYear);
+                        edu.setGraduatedYear(date);
+                    }
+                    edu.setUniversityName(universityName);
+                    edu.setDegree(degree);
+                    edu.setUniversityId(Integer.parseInt(degreeId));
+                    educationDegrees.add(edu);
                 }
-                edu.setUniversityName(universityName);
-                edu.setDegree(degree);
-                edu.setUniversityId(Integer.parseInt(degreeId));
-                educationDegrees.add(edu);
             }
         }
+
         return educationDegrees;
     }
 
@@ -213,21 +229,23 @@ public class ResumeController {
         String[] workplacesIds = parameterMap.get("workPlaceId");
 
         List<WorkPlace> mainWorkPlacesList = new ArrayList<>();
-        for (int k = 0; k < workplaces.length; k++) {
-            WorkPlace workPlace = new WorkPlace();
-            String workplacesNames = workplaces[k];
-            String workplacesId = workplacesIds[k];
-            if (workplacesIds[k].equals("") || workplacesIds[k].isEmpty()) {
-                List<WorkPlace> workPlaceList = new ArrayList<>();
-                WorkPlace newWorkPlace = new WorkPlace();
-                String newWorkplaceName = workplaces[k];
-                newWorkPlace.setWorkPlaceName(newWorkplaceName);
-                workPlaceList.add(newWorkPlace);
-                workPlaceService.save(workPlaceList, id);
-            } else {
-                workPlace.setWorkPlaceName(workplacesNames);
-                workPlace.setWorkPlaceId(Integer.parseInt(workplacesId));
-                mainWorkPlacesList.add(workPlace);
+        if (workplaces != null) {
+            for (int k = 0; k < workplaces.length; k++) {
+                WorkPlace workPlace = new WorkPlace();
+                String workplacesNames = workplaces[k];
+                String workplacesId = workplacesIds[k];
+                if (workplacesIds[k].equals("") || workplacesIds[k].isEmpty()) {
+                    List<WorkPlace> workPlaceList = new ArrayList<>();
+                    WorkPlace newWorkPlace = new WorkPlace();
+                    String newWorkplaceName = workplaces[k];
+                    newWorkPlace.setWorkPlaceName(newWorkplaceName);
+                    workPlaceList.add(newWorkPlace);
+                    workPlaceService.save(workPlaceList, id);
+                } else {
+                    workPlace.setWorkPlaceName(workplacesNames);
+                    workPlace.setWorkPlaceId(Integer.parseInt(workplacesId));
+                    mainWorkPlacesList.add(workPlace);
+                }
             }
         }
         return mainWorkPlacesList;
