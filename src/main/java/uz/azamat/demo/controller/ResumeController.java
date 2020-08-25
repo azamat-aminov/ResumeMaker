@@ -30,17 +30,13 @@ public class ResumeController {
     @Resource
     WorkPlaceService workPlaceService;
 
-    @GetMapping()
-    public String getLoginPage() {
-        return "login";
-    }
-
     @GetMapping("/createPerson")
-    public String createPerson(Person person, EducationDegree edu) {
+    public String getLoginPage() {
         return "person";
     }
 
-    @PostMapping("/form")
+
+    @GetMapping()
     public String callFormPage(Person person, EducationDegree edu) {
         return "person";
     }
